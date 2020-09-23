@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - cd terraform-base/ && ./run.sh "$CODEBUILD_SRC_DIR_TerraformPlan"/terraform.plan
+
+artifacts:
+  files:
+    - terraform-base/terraform.plan
+  discard-paths: yes
