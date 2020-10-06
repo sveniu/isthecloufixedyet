@@ -29,3 +29,16 @@ resource "aws_route53_record" "ns_main" {
     "${aws_route53_zone.main.name_servers[3]}.",
   ]
 }
+
+# Point www to the CloudFront distribution.
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = "www.${aws_route53_zone.main.name}"
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.web.domain_name
+    zone_id                = aws_cloudfront_distribution.web.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
