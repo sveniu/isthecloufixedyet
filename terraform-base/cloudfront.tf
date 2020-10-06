@@ -62,8 +62,8 @@ resource "aws_cloudfront_distribution" "web" {
     # Let CloudFront automatically compress content.
     compress = true
 
-    # Allow both HTTP and HTTPS.
-    viewer_protocol_policy = "allow-all"
+    # Redirect HTTP to HTTPS.
+    viewer_protocol_policy = "redirect-to-https"
 
     # Set the cache TTL values.
     min_ttl     = 10
